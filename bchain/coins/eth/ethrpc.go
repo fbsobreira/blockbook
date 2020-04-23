@@ -762,3 +762,23 @@ func (b *EthereumRPC) EthereumTypeGetNonce(addrDesc bchain.AddressDescriptor) (u
 func (b *EthereumRPC) GetChainParser() bchain.BlockChainParser {
 	return b.Parser
 }
+
+// TronTypeGetBalance is not supported
+func (b *EthereumRPC) TronTypeGetBalance(addrDesc bchain.AddressDescriptor) (*big.Int, map[string]int64, error) {
+	return nil, nil, errors.New("Not supported")
+}
+
+// TronTypeEstimateFee is not supported
+func (b *EthereumRPC) TronTypeEstimateFee(string) (uint64, error) {
+	return 0, errors.New("Not supported")
+}
+
+// TronTypeGetTokenInfo is not supported
+func (b *EthereumRPC) TronTypeGetTokenInfo(contractDesc bchain.AddressDescriptor) (*bchain.Erc20Contract, error) {
+	return nil, errors.New("Not supported")
+}
+
+// TronTypeGetTrc20ContractBalance is not supported
+func (b *EthereumRPC) TronTypeGetTrc20ContractBalance(addrDesc, contractDesc bchain.AddressDescriptor) (*big.Int, error) {
+	return nil, errors.New("Not supported")
+}

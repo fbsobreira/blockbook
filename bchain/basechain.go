@@ -58,3 +58,23 @@ func (b *BaseChain) EthereumTypeGetErc20ContractInfo(contractDesc AddressDescrip
 func (b *BaseChain) EthereumTypeGetErc20ContractBalance(addrDesc, contractDesc AddressDescriptor) (*big.Int, error) {
 	return nil, errors.New("Not supported")
 }
+
+// TronTypeGetBalance is not supported
+func (b *BaseChain) TronTypeGetBalance(addrDesc AddressDescriptor) (*big.Int, map[string]int64, error) {
+	return nil, nil, errors.New("Not supported")
+}
+
+// TronTypeEstimateFee is not supported
+func (b *BaseChain) TronTypeEstimateFee(string) (uint64, error) {
+	return 0, errors.New("Not supported")
+}
+
+// TronTypeGetTokenInfo is not supported
+func (b *BaseChain) TronTypeGetTokenInfo(contractDesc AddressDescriptor) (*Erc20Contract, error) {
+	return nil, errors.New("Not supported")
+}
+
+// TronTypeGetTrc20ContractBalance is not supported
+func (b *BaseChain) TronTypeGetTrc20ContractBalance(addrDesc, contractDesc AddressDescriptor) (*big.Int, error) {
+	return nil, errors.New("Not supported")
+}

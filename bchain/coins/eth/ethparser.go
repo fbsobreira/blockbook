@@ -501,3 +501,8 @@ func GetEthereumTxData(tx *bchain.Tx) *EthereumTxData {
 	}
 	return &etd
 }
+
+// TronTypeGetTokensFromTx is unsupported
+func (p *EthereumParser) TronTypeGetTokensFromTx(tx *bchain.Tx) ([]bchain.Erc20Transfer, error) {
+	return nil, errors.New("Not supported")
+}
