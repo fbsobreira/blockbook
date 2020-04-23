@@ -3,6 +3,7 @@ package db
 import (
 	"blockbook/bchain"
 	"blockbook/bchain/coins/eth"
+	"blockbook/bchain/coins/trx"
 	"blockbook/common"
 
 	"github.com/golang/glog"
@@ -83,6 +84,11 @@ func (c *TxCache) GetTransaction(txid string) (*bchain.Tx, int, error) {
 			}
 		} else if c.chainType == bchain.ChainEthereumType {
 			h, err = eth.GetHeightFromTx(tx)
+			if err != nil {
+				return nil, 0, err
+			}
+		} else if c.chainType == bchain.ChainTronType {
+			h, err = trx.GetHeightFromTx(tx)
 			if err != nil {
 				return nil, 0, err
 			}
