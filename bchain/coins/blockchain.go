@@ -33,6 +33,7 @@ import (
 	"blockbook/bchain/coins/qtum"
 	"blockbook/bchain/coins/ravencoin"
 	"blockbook/bchain/coins/ritocoin"
+	"blockbook/bchain/coins/trx"
 	"blockbook/bchain/coins/unobtanium"
 	"blockbook/bchain/coins/vertcoin"
 	"blockbook/bchain/coins/viacoin"
@@ -110,6 +111,7 @@ func init() {
 	BlockChainFactories["Bitcore"] = bitcore.NewBitcoreRPC
 	BlockChainFactories["Omotenashicoin"] = omotenashicoin.NewOmotenashiCoinRPC
 	BlockChainFactories["Omotenashicoin Testnet"] = omotenashicoin.NewOmotenashiCoinRPC
+	BlockChainFactories["Tron"] = trx.NewTronRPC
 }
 
 // GetCoinNameFromConfig gets coin name and coin shortcut from config file
@@ -307,6 +309,26 @@ func (c *blockChainWithMetrics) EthereumTypeGetErc20ContractInfo(contractDesc bc
 func (c *blockChainWithMetrics) EthereumTypeGetErc20ContractBalance(addrDesc, contractDesc bchain.AddressDescriptor) (v *big.Int, err error) {
 	defer func(s time.Time) { c.observeRPCLatency("EthereumTypeGetErc20ContractInfo", s, err) }(time.Now())
 	return c.b.EthereumTypeGetErc20ContractBalance(addrDesc, contractDesc)
+}
+
+func (c *blockChainWithMetrics) TronTypeGetBalance(addrDesc bchain.AddressDescriptor) (v *big.Int, t map[string]int64, err error) {
+	defer func(s time.Time) { c.observeRPCLatency("TronTypeGetBalance", s, err) }(time.Now())
+	return c.b.TronTypeGetBalance(addrDesc)
+}
+
+func (c *blockChainWithMetrics) TronTypeEstimateFee(tx string) (v uint64, err error) {
+	defer func(s time.Time) { c.observeRPCLatency("TronTypeEstimateFee", s, err) }(time.Now())
+	return c.b.TronTypeEstimateFee(tx)
+}
+
+func (c *blockChainWithMetrics) TronTypeGetTokenInfo(contractDesc bchain.AddressDescriptor) (v *bchain.Erc20Contract, err error) {
+	defer func(s time.Time) { c.observeRPCLatency("TronTypeGetTokenInfo", s, err) }(time.Now())
+	return c.b.TronTypeGetTokenInfo(contractDesc)
+}
+
+func (c *blockChainWithMetrics) TronTypeGetTrc20ContractBalance(addrDesc, contractDesc bchain.AddressDescriptor) (v *big.Int, err error) {
+	defer func(s time.Time) { c.observeRPCLatency("TronTypeGetTrc20ContractBalance", s, err) }(time.Now())
+	return c.b.TronTypeGetTrc20ContractBalance(addrDesc, contractDesc)
 }
 
 type mempoolWithMetrics struct {
