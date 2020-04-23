@@ -471,6 +471,9 @@ func (b *TronRPC) GetBlock(hash string, height uint32) (*bchain.Block, error) {
 	if err != nil {
 		return nil, err
 	}
+	if proto.Size(h) == 0 {
+		return nil, bchain.ErrBlockNotFound
+	}
 
 	bbh, err := b.trxHeaderToBlockHeader(h)
 	if err != nil {
