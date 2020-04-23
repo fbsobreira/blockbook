@@ -151,8 +151,9 @@ func (s *PublicServer) ConnectFullPublicInterface() {
 	// use versioned api for stability
 
 	var apiDefault int
-	// ethereum supports only api V2
-	if s.chainParser.GetChainType() == bchain.ChainEthereumType {
+	// ethereum/tron supports only api V2
+	if s.chainParser.GetChainType() == bchain.ChainEthereumType ||
+		s.chainParser.GetChainType() == bchain.ChainTronType {
 		apiDefault = apiV2
 	} else {
 		apiDefault = apiV1
@@ -485,6 +486,10 @@ func (s *PublicServer) parseTemplates() []*template.Template {
 		t[txTpl] = createTemplate("./static/templates/tx.html", "./static/templates/txdetail_ethereumtype.html", "./static/templates/base.html")
 		t[addressTpl] = createTemplate("./static/templates/address.html", "./static/templates/txdetail_ethereumtype.html", "./static/templates/paging.html", "./static/templates/base.html")
 		t[blockTpl] = createTemplate("./static/templates/block.html", "./static/templates/txdetail_ethereumtype.html", "./static/templates/paging.html", "./static/templates/base.html")
+	} else if s.chainParser.GetChainType() == bchain.ChainTronType {
+		t[txTpl] = createTemplate("./static/templates/tx.html", "./static/templates/txdetail_trontype.html", "./static/templates/base.html")
+		t[addressTpl] = createTemplate("./static/templates/address.html", "./static/templates/txdetail_trontype.html", "./static/templates/paging.html", "./static/templates/base.html")
+		t[blockTpl] = createTemplate("./static/templates/block_trontype.html", "./static/templates/txdetail_trontype.html", "./static/templates/paging.html", "./static/templates/base.html")
 	} else {
 		t[txTpl] = createTemplate("./static/templates/tx.html", "./static/templates/txdetail.html", "./static/templates/base.html")
 		t[addressTpl] = createTemplate("./static/templates/address.html", "./static/templates/txdetail.html", "./static/templates/paging.html", "./static/templates/base.html")

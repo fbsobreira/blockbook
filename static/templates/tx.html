@@ -51,6 +51,45 @@
                 <td class="data">{{formatAmount $tx.EthereumSpecific.GasPrice}} {{$cs}}</td>
             </tr>
             {{- else -}}
+            {{- if $tx.TronSpecific -}}
+            <tr>
+                <td>Status</td>
+                {{- if $tx.TronSpecific.Status -}}
+                {{- if eq $tx.TronSpecific.Status 1 -}}
+                <td class="data text-success">Success</td>
+                {{- else -}}
+                {{- if eq $tx.TronSpecific.Status -0 -}}
+                <td class="data">Fail</td>
+                {{- else -}}
+                {{- if eq $tx.TronSpecific.Status -1 -}}
+                <td class="data">Revert</td>
+                {{- else -}}
+                <td class="data">Unknown</td>
+                {{- end -}}
+                {{- end -}}
+                {{- end -}}
+                {{- else -}}
+                <td class="data text-danger">Fail</td>
+                {{- end -}}
+            </tr>
+            <tr>
+                <td>Value</td>
+                <td class="data">{{formatAmount $tx.ValueOutSat}} {{$cs}}</td>
+            </tr>
+            <tr>
+                <td>Energy Used / Burn</td>
+                <td class="data">{{$tx.TronSpecific.EnergyUsage}} / {{$tx.TronSpecific.EnergyFee}}</td>
+            </tr>
+            <tr>
+                <td>Energy From Contract</td>
+                <td class="data">{{$tx.TronSpecific.OriginEnergyUsage}}</td>
+            </tr>
+
+            <tr>
+                <td>Bandwidth Used / Burn</td>
+                <td class="data">{{$tx.TronSpecific.NetUsage}} / {{$tx.TronSpecific.NetFee}}</td>
+            </tr>
+            {{- else -}}
             <tr>
                 <td>Total Input</td>
                 <td class="data">{{formatAmount $tx.ValueInSat}} {{$cs}}</td>
@@ -59,6 +98,7 @@
                 <td>Total Output</td>
                 <td class="data">{{formatAmount $tx.ValueOutSat}} {{$cs}}</td>
             </tr>
+            {{- end -}}
             {{- end -}}
             {{- if $tx.FeesSat -}}
             <tr>
