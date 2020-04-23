@@ -134,8 +134,14 @@ type Vout struct {
 // TokenType specifies type of token
 type TokenType string
 
-// ERC20TokenType is Ethereum ERC20 token
-const ERC20TokenType TokenType = "ERC20"
+const (
+	// ERC20TokenType is Ethereum ERC20 token
+	ERC20TokenType TokenType = "ERC20"
+	// TRC20TokenType is TRON TRC20 token
+	TRC20TokenType TokenType = "TRC20"
+	// TRC10TokenType is TRON native tokens
+	TRC10TokenType TokenType = "TRC10"
+)
 
 // XPUBAddressTokenType is address derived from xpub
 const XPUBAddressTokenType TokenType = "XPUBAddress"
@@ -176,6 +182,18 @@ type EthereumSpecific struct {
 	GasPrice *Amount  `json:"gasPrice"`
 }
 
+// TronSpecific contains tron specific transaction data
+type TronSpecific struct {
+	Status            int   `json:"status"` // 1 OK, 0 Fail, -1 pending, -2 unknown
+	TotalFee          int64 `json:"fees"`
+	EnergyUsage       int64 `json:"energyusage"`
+	EnergyFee         int64 `json:"energyfee"`
+	OriginEnergyUsage int64 `json:"originenergyusage"`
+	EnergyUsageTotal  int64 `json:"energyusagetotal"`
+	NetUsage          int64 `json:"netusage"`
+	NetFee            int64 `json:"netfee"`
+}
+
 // Tx holds information about a transaction
 type Tx struct {
 	Txid             string            `json:"txid"`
@@ -197,6 +215,7 @@ type Tx struct {
 	CoinSpecificJSON json.RawMessage   `json:"-"`
 	TokenTransfers   []TokenTransfer   `json:"tokenTransfers,omitempty"`
 	EthereumSpecific *EthereumSpecific `json:"ethereumSpecific,omitempty"`
+	TronSpecific     *TronSpecific     `json:"tronSpecific,omitempty"`
 }
 
 // FeeStats contains detailed block fee statistics
