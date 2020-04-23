@@ -17,6 +17,8 @@ const (
 	ChainBitcoinType = ChainType(iota)
 	// ChainEthereumType is blockchain derived from ethereum
 	ChainEthereumType
+	// ChainTronType is blockchain derived from tron
+	ChainTronType
 )
 
 // errors with specific meaning returned by blockchain rpc
@@ -252,6 +254,11 @@ type BlockChain interface {
 	EthereumTypeEstimateGas(params map[string]interface{}) (uint64, error)
 	EthereumTypeGetErc20ContractInfo(contractDesc AddressDescriptor) (*Erc20Contract, error)
 	EthereumTypeGetErc20ContractBalance(addrDesc, contractDesc AddressDescriptor) (*big.Int, error)
+	// Tron specific
+	TronTypeGetBalance(addrDesc AddressDescriptor) (*big.Int, map[string]int64, error)
+	TronTypeEstimateFee(string) (uint64, error)
+	TronTypeGetTokenInfo(contractDesc AddressDescriptor) (*Erc20Contract, error)
+	TronTypeGetTrc20ContractBalance(addrDesc, contractDesc AddressDescriptor) (*big.Int, error)
 }
 
 // BlockChainParser defines common interface to parsing and conversions of block chain data
@@ -295,6 +302,8 @@ type BlockChainParser interface {
 	DeriveAddressDescriptorsFromTo(xpub string, change uint32, fromIndex uint32, toIndex uint32) ([]AddressDescriptor, error)
 	// EthereumType specific
 	EthereumTypeGetErc20FromTx(tx *Tx) ([]Erc20Transfer, error)
+	// Tron specific
+	TronTypeGetTokensFromTx(tx *Tx) ([]Erc20Transfer, error)
 }
 
 // Mempool defines common interface to mempool
