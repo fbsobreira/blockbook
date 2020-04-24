@@ -70,7 +70,7 @@ func (b *BaseChain) TronTypeEstimateFee(string) (uint64, error) {
 }
 
 // TronTypeGetTokenInfo is not supported
-func (b *BaseChain) TronTypeGetTokenInfo(contractDesc AddressDescriptor) (*Erc20Contract, error) {
+func (b *BaseChain) TronTypeGetTokenInfo(contractDesc AddressDescriptor) (*TronTokenInfo, error) {
 	return nil, errors.New("Not supported")
 }
 

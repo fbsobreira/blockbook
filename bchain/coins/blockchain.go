@@ -321,7 +321,7 @@ func (c *blockChainWithMetrics) TronTypeEstimateFee(tx string) (v uint64, err er
 	return c.b.TronTypeEstimateFee(tx)
 }
 
-func (c *blockChainWithMetrics) TronTypeGetTokenInfo(contractDesc bchain.AddressDescriptor) (v *bchain.Erc20Contract, err error) {
+func (c *blockChainWithMetrics) TronTypeGetTokenInfo(contractDesc bchain.AddressDescriptor) (v *bchain.TronTokenInfo, err error) {
 	defer func(s time.Time) { c.observeRPCLatency("TronTypeGetTokenInfo", s, err) }(time.Now())
 	return c.b.TronTypeGetTokenInfo(contractDesc)
 }

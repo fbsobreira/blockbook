@@ -774,7 +774,7 @@ func (b *EthereumRPC) TronTypeEstimateFee(string) (uint64, error) {
 }
 
 // TronTypeGetTokenInfo is not supported
-func (b *EthereumRPC) TronTypeGetTokenInfo(contractDesc bchain.AddressDescriptor) (*bchain.Erc20Contract, error) {
+func (b *EthereumRPC) TronTypeGetTokenInfo(contractDesc bchain.AddressDescriptor) (*bchain.TronTokenInfo, error) {
 	return nil, errors.New("Not supported")
 }
 

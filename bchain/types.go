@@ -196,6 +196,17 @@ type Erc20Transfer struct {
 	Tokens   big.Int
 }
 
+// TronType specific
+
+// TronTokenInfo contains info about TRC10/TRC20 tokens/contract
+type TronTokenInfo struct {
+	Type     string `json:"type"`
+	Contract string `json:"contract"`
+	Name     string `json:"name"`
+	Symbol   string `json:"symbol"`
+	Decimals int    `json:"decimals"`
+}
+
 // MempoolTxidEntry contains mempool txid with first seen time
 type MempoolTxidEntry struct {
 	Txid string
@@ -257,7 +268,7 @@ type BlockChain interface {
 	// Tron specific
 	TronTypeGetBalance(addrDesc AddressDescriptor) (*big.Int, map[string]int64, error)
 	TronTypeEstimateFee(string) (uint64, error)
-	TronTypeGetTokenInfo(contractDesc AddressDescriptor) (*Erc20Contract, error)
+	TronTypeGetTokenInfo(contractDesc AddressDescriptor) (*TronTokenInfo, error)
 	TronTypeGetTrc20ContractBalance(addrDesc, contractDesc AddressDescriptor) (*big.Int, error)
 }
 
