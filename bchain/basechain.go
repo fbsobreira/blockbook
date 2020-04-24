@@ -65,7 +65,7 @@ func (b *BaseChain) TronTypeGetBalance(addrDesc AddressDescriptor) (*big.Int, ma
 }
 
 // TronTypeEstimateFee is not supported
-func (b *BaseChain) TronTypeEstimateFee(string) (uint64, error) {
+func (b *BaseChain) TronTypeEstimateFee(params map[string]interface{}) (uint64, error) {
 	return 0, errors.New("Not supported")
 }
 

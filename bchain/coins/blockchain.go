@@ -316,9 +316,9 @@ func (c *blockChainWithMetrics) TronTypeGetBalance(addrDesc bchain.AddressDescri
 	return c.b.TronTypeGetBalance(addrDesc)
 }
 
-func (c *blockChainWithMetrics) TronTypeEstimateFee(tx string) (v uint64, err error) {
+func (c *blockChainWithMetrics) TronTypeEstimateFee(params map[string]interface{}) (v uint64, err error) {
 	defer func(s time.Time) { c.observeRPCLatency("TronTypeEstimateFee", s, err) }(time.Now())
-	return c.b.TronTypeEstimateFee(tx)
+	return c.b.TronTypeEstimateFee(params)
 }
 
 func (c *blockChainWithMetrics) TronTypeGetTokenInfo(contractDesc bchain.AddressDescriptor) (v *bchain.TronTokenInfo, err error) {

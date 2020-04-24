@@ -583,6 +583,9 @@ func (s *WebsocketServer) estimateFee(c *websocketChannel, params []byte) (inter
 			fee.Mul(&fee, new(big.Int).SetUint64(gas))
 			res[i].FeePerTx = fee.String()
 		}
+	} else if s.chainParser.GetChainType() == bchain.ChainTronType {
+		// TODO:
+		return s.chain.TronTypeEstimateFee(r.Specific)
 	} else {
 		conservative := true
 		v, ok := r.Specific["conservative"]

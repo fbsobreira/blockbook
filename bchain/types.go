@@ -267,7 +267,7 @@ type BlockChain interface {
 	EthereumTypeGetErc20ContractBalance(addrDesc, contractDesc AddressDescriptor) (*big.Int, error)
 	// Tron specific
 	TronTypeGetBalance(addrDesc AddressDescriptor) (*big.Int, map[string]int64, error)
-	TronTypeEstimateFee(string) (uint64, error)
+	TronTypeEstimateFee(params map[string]interface{}) (uint64, error)
 	TronTypeGetTokenInfo(contractDesc AddressDescriptor) (*TronTokenInfo, error)
 	TronTypeGetTrc20ContractBalance(addrDesc, contractDesc AddressDescriptor) (*big.Int, error)
 }

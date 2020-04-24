@@ -717,9 +717,6 @@ func GetMessageNumber(n int64) *api.NumberMessage {
 }
 
 // TronTypeEstimateFee is not supported
-func (b *TronRPC) TronTypeEstimateFee(tx string) (uint64, error) {
-	if has0xPrefix(tx) {
-		return uint64(len(tx[2:]) / 2), nil
-	}
-	return uint64(len(tx) / 2), nil
+func (b *TronRPC) TronTypeEstimateFee(params map[string]interface{}) (uint64, error) {
+	return 0, errors.New("Not supported")
 }

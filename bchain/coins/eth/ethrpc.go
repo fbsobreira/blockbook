@@ -769,7 +769,7 @@ func (b *EthereumRPC) TronTypeGetBalance(addrDesc bchain.AddressDescriptor) (*bi
 }
 
 // TronTypeEstimateFee is not supported
-func (b *EthereumRPC) TronTypeEstimateFee(string) (uint64, error) {
+func (b *EthereumRPC) TronTypeEstimateFee(params map[string]interface{}) (uint64, error) {
 	return 0, errors.New("Not supported")
 }
 
