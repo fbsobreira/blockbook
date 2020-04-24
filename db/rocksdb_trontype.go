@@ -9,7 +9,6 @@ import (
 	vlq "github.com/bsm/go-vlq"
 	"github.com/golang/glog"
 	"github.com/juju/errors"
-	"github.com/sasaxie/go-client-api/common/hexutil"
 	"github.com/tecbot/gorocksdb"
 )
 
@@ -54,18 +53,16 @@ func (d *RocksDB) GetAddrDescTronContracts(addrDesc bchain.AddressDescriptor) (*
 	buf = buf[l:]
 	c := make([]AddrContract, 0, 4)
 	for len(buf) > 0 {
-		glog.Info("Length: ", len(buf))
-		glog.Info("Buf Data: ", hexutil.Encode(buf))
-		if len(buf) < trx.TronTypeAddressDescriptorLen {
+		if len(buf) < trx.TronTypeAddressLen {
 			return nil, errors.New("Invalid data stored in cfAddressContracts for AddrDesc " + addrDesc.String())
 		}
-		txs, l := unpackVaruint(buf[trx.TronTypeAddressDescriptorLen:])
-		contract := append(bchain.AddressDescriptor(nil), buf[:trx.TronTypeAddressDescriptorLen]...)
+		txs, l := unpackVaruint(buf[trx.TronTypeAddressLen:])
+		contract := append(bchain.AddressDescriptor(nil), buf[:trx.TronTypeAddressLen]...)
 		c = append(c, AddrContract{
 			Contract: contract,
 			Txs:      txs,
 		})
-		buf = buf[trx.TronTypeAddressDescriptorLen+l:]
+		buf = buf[trx.TronTypeAddressLen+l:]
 	}
 	return &AddrContracts{
 		TotalTxs:       tt,
